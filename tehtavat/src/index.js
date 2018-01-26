@@ -8,7 +8,7 @@ function summa(a, b, c) {
 const Otsikko = (props) => {
     return (
         <div>
-            <h1>{props.kurssi}</h1>
+            <h1>{props.kurssi.nimi}</h1>
         </div>
     )
 }
@@ -24,42 +24,44 @@ const Osa = (props) => {
 const Sisalto = (props) => {
     return (
         <div>
-            <Osa osa={props.osat[0].nimi} tehtavia={props.osat[0].tehtavia} />
-            <Osa osa={props.osat[1].nimi} tehtavia={props.osat[1].tehtavia} />
-            <Osa osa={props.osat[2].nimi} tehtavia={props.osat[2].tehtavia} />
+            <Osa osa={props.kurssi.osat[0].nimi} tehtavia={props.kurssi.osat[0].tehtavia} />
+            <Osa osa={props.kurssi.osat[1].nimi} tehtavia={props.kurssi.osat[1].tehtavia} />
+            <Osa osa={props.kurssi.osat[2].nimi} tehtavia={props.kurssi.osat[2].tehtavia} />
         </div>
     )
 }
 const Yhteensa = (props) => {
     return (
         <div>
-            <p>yhteensä {summa(props.osat[0].tehtavia, props.osat[1].tehtavia, props.osat[2].tehtavia)} tehtävää</p>
+            <p>yhteensä {summa(props.kurssi.osat[0].tehtavia, props.kurssi.osat[1].tehtavia, props.kurssi.osat[2].tehtavia)} tehtävää</p>
         </div>
     )
 }
 
 const App = () => {
-    const kurssi = 'Half Stack -sovelluskehitys'
-    const osat = [
-        {
+    const kurssi = {
+        nimi: 'Half Stack -sovelluskehitys',
+        osat: [
+          {
             nimi: 'Reactin perusteet',
             tehtavia: 10
-        },
-        {
+          },
+          {
             nimi: 'Tiedonvälitys propseilla',
             tehtavia: 7
-        },
-        {
+          },
+          {
             nimi: 'Komponenttien tila',
             tehtavia: 14
-        }
-    ]
+          }
+        ]
+      }
 
     return (
         <div>
             <Otsikko kurssi={kurssi} />
-            <Sisalto osat={osat} />
-            <Yhteensa osat={osat} />
+            <Sisalto kurssi={kurssi} /> 
+            <Yhteensa kurssi={kurssi} />
         </div>
     )
 }
