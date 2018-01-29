@@ -40,7 +40,7 @@ const Osa = (props) => {
                 <tbody>
                     <tr>
                         <td style={tdStyle} >{props.unicafe}</td>
-                        <td >{props.counter}</td>
+                        <td >{props.counter}{props.percentage}</td>
                     </tr>
                 </tbody>
             </table>
@@ -150,7 +150,7 @@ class App extends React.Component {
         return (
             <div>
                 <Osa unicafe={unicafe.osat[3].nimi} counter={keskiarvo(this.state.positive, this.state.neutral, this.state.negative)} />
-                <Osa unicafe={unicafe.osat[4].nimi} counter={positiivisia(this.state.positive, this.state.neutral, this.state.negative)} />
+                <Osa unicafe={unicafe.osat[4].nimi} counter={positiivisia(this.state.positive, this.state.neutral, this.state.negative)}  percentage={'%'}/>
             </div>
         )
     }
