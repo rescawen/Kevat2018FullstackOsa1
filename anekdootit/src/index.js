@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+function myFunction() {
+   return Math.floor((Math.random() * 6))
+}
+
 const Button = ({ handleClick, text }) => (
     <button onClick={handleClick}>
         {text}
@@ -24,11 +28,12 @@ class App extends React.Component {
         return (
             <div>
                 {this.props.anecdotes[this.state.selected]}
-
+                <div>
                 <Button
-                    handleClick={this.asetaArvoon(this.state.selected + 1)}
+                    handleClick={this.asetaArvoon(myFunction())}
                     text="next anecdote"
                 />
+                </div>
             </div>
         )
     }
