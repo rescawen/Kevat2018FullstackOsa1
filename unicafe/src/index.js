@@ -4,16 +4,16 @@ import ReactDOM from 'react-dom'
 function precisionRound(number, precision) {
     var factor = Math.pow(10, precision);
     return Math.round(number * factor) / factor;
-  }
+}
 
 function keskiarvo(a, b, c) {
 
-    return precisionRound((a - c) / (a + b + c),1)
+    return precisionRound((a - c) / (a + b + c), 1)
 }
 
 function positiivisia(a, b, c) {
 
-    return precisionRound((a / (a + b + c))*100,1)
+    return precisionRound((a / (a + b + c)) * 100, 1)
 }
 
 
@@ -32,7 +32,7 @@ const tdStyle = {
 
 };
 
-const Osa = (props) => {
+const Statistic = (props) => {
     return (
         <div>
 
@@ -66,7 +66,7 @@ const unicafe = {
         }
 
     ],
-    osat: [
+    statistic: [
         {
             nimi: 'hyvä',
         },
@@ -139,18 +139,11 @@ class App extends React.Component {
     Statistics = (props) => {
         return (
             <div>
-                <Osa unicafe={unicafe.osat[0].nimi} counter={this.state.positive} />
-                <Osa unicafe={unicafe.osat[1].nimi} counter={this.state.neutral} />
-                <Osa unicafe={unicafe.osat[2].nimi} counter={this.state.negative} />
-            </div>
-        )
-    }
-
-    Statistic = (props) => {
-        return (
-            <div>
-                <Osa unicafe={unicafe.osat[3].nimi} counter={keskiarvo(this.state.positive, this.state.neutral, this.state.negative)} />
-                <Osa unicafe={unicafe.osat[4].nimi} counter={positiivisia(this.state.positive, this.state.neutral, this.state.negative)}  percentage={'%'}/>
+                <Statistic unicafe={unicafe.statistic[0].nimi} counter={this.state.positive} />
+                <Statistic unicafe={unicafe.statistic[1].nimi} counter={this.state.neutral} />
+                <Statistic unicafe={unicafe.statistic[2].nimi} counter={this.state.negative} />
+                <Statistic unicafe={unicafe.statistic[3].nimi} counter={keskiarvo(this.state.positive, this.state.neutral, this.state.negative)} />
+                <Statistic unicafe={unicafe.statistic[4].nimi} counter={positiivisia(this.state.positive, this.state.neutral, this.state.negative)} percentage={'%'} />
             </div>
         )
     }
@@ -170,7 +163,6 @@ class App extends React.Component {
             <div>
                 <this.AlwaysThere />
                 <this.Statistics />
-                <this.Statistic />
             </div>
         )
     }
