@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom'
 
 function keskiarvo(a, b, c) {
 
-    return (a-c)/(a+b+c)
+    return (a - c) / (a + b + c)
 }
 
 function positiivisia(a, b, c) {
 
-    return a/(a+b+c)
+    return a / (a + b + c)
 }
 
 
@@ -23,25 +23,35 @@ const Otsikko = (props) => {
 
 const tdStyle = {
     padding: '0.1em',
-    width:'100px'
-    
-  };
+    width: '100px'
+
+};
 
 const Osa = (props) => {
     return (
         <div>
 
             <table >
-                <tr>
-                    <td style={tdStyle} >{props.unicafe}</td>
-                    <td >{props.counter}</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td style={tdStyle} >{props.unicafe}</td>
+                        <td >{props.counter}</td>
+                    </tr>
+                </tbody>
             </table>
 
 
         </div>
     )
 }
+
+
+const Tyhja = (props) => {
+    return (
+        <div><p>ei yhtään palautetta annettu</p></div>
+    )
+}
+
 
 
 
@@ -118,10 +128,13 @@ class App extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <Otsikko unicafe={unicafe.otsikko[0].nimi} />
+
+        if (this.state.positive === 0 && this.state.neutral === 0 && this.state.negative === 0) {
+            return (
                 <div>
+                <Otsikko unicafe={unicafe.otsikko[0].nimi} />
+                
+                 <div>
                     <Button
                         handleClick={this.asetaArvoon(this.state.positive + 1, "positive")}
                         text="hyvä"
@@ -136,12 +149,36 @@ class App extends React.Component {
                     />
                 </div>
                 <Otsikko unicafe={unicafe.otsikko[1].nimi} />
+                <Tyhja />
+                </div>
+            )
+        }
+
+        return (
+            <div>
+                <Otsikko unicafe={unicafe.otsikko[0].nimi} />
+                
+                 <div>
+                    <Button
+                        handleClick={this.asetaArvoon(this.state.positive + 1, "positive")}
+                        text="hyvä"
+                    />
+                    <Button
+                        handleClick={this.asetaArvoon(this.state.neutral + 1, "neutral")}
+                        text="neutraali"
+                    />
+                    <Button
+                        handleClick={this.asetaArvoon(this.state.negative + 1, "negative")}
+                        text="huono"
+                    />
+                </div>
+                <Otsikko unicafe={unicafe.otsikko[1].nimi} />        
                 <Osa unicafe={unicafe.osat[0].nimi} counter={this.state.positive} />
                 <Osa unicafe={unicafe.osat[1].nimi} counter={this.state.neutral} />
                 <Osa unicafe={unicafe.osat[2].nimi} counter={this.state.negative} />
-                <Osa unicafe={unicafe.osat[3].nimi} counter={keskiarvo(this.state.positive, this.state.neutral, this.state.negative)}/>
-                <Osa unicafe={unicafe.osat[4].nimi} counter={positiivisia(this.state.positive, this.state.neutral, this.state.negative)}/>
-            </div>
+                <Osa unicafe={unicafe.osat[3].nimi} counter={keskiarvo(this.state.positive, this.state.neutral, this.state.negative)} />
+                <Osa unicafe={unicafe.osat[4].nimi} counter={positiivisia(this.state.positive, this.state.neutral, this.state.negative)} />
+            </div> 
         )
     }
 }
