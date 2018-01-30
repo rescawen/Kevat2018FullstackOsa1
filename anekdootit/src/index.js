@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-function myFunction() {
-   return Math.floor((Math.random() * 6))
+function randomNumber() {
+    return Math.floor((Math.random() * 6))
 }
 
 const Button = ({ handleClick, text }) => (
@@ -20,30 +20,24 @@ class App extends React.Component {
     }
 
     nextAnectote = (arvo) =>
-    () => {
-      this.setState({ selected: arvo })
-    }
-    voteAnectote = (arvo) =>
-    () => {
-      this.setState({ selected: arvo })
-    }
+        () => {
+            this.setState({ selected: arvo })
+        }
+
 
     render() {
         return (
             <div>
                 {this.props.anecdotes[this.state.selected]}
                 <div>
-                <Button
-                    handleClick={this.voteAnectote(myFunction())}
-                    text="vote"
-                />
 
-                <Button
-                    handleClick={this.nextAnectote(myFunction())}
-                    text="next anecdote"
-                    
-                />
-                
+
+                    <Button
+                        handleClick={this.nextAnectote(randomNumber())}
+                        text="next anecdote"
+
+                    />
+
                 </div>
             </div>
         )
