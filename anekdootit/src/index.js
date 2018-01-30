@@ -19,7 +19,11 @@ class App extends React.Component {
         }
     }
 
-    asetaArvoon = (arvo) =>
+    nextAnectote = (arvo) =>
+    () => {
+      this.setState({ selected: arvo })
+    }
+    voteAnectote = (arvo) =>
     () => {
       this.setState({ selected: arvo })
     }
@@ -30,9 +34,16 @@ class App extends React.Component {
                 {this.props.anecdotes[this.state.selected]}
                 <div>
                 <Button
-                    handleClick={this.asetaArvoon(myFunction())}
-                    text="next anecdote"
+                    handleClick={this.voteAnectote(myFunction())}
+                    text="vote"
                 />
+
+                <Button
+                    handleClick={this.nextAnectote(myFunction())}
+                    text="next anecdote"
+                    
+                />
+                
                 </div>
             </div>
         )
